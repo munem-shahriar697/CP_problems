@@ -4,41 +4,40 @@ using namespace std;
 
 #define endl "\n"
 
-bool divisible(string s, int n)
-{
-    int rem = 0, len = s.size();
-    for (int i = 0; i < len; i++)
-    {
-        int dig = s[i] - '0';
-        rem = (rem * 10) + dig;
-        rem = rem % n;
-    }
-    if (rem == 0)
-    {
-        return true;
-    }
-    return false;
-}
-
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    int t, k = 0;
-    std ::cin >> t;
+    int t;
+    cin >> t;
 
     while (t--)
     {
-        string s;
-        std ::cin >> s;
-        if (s[1] == '+')
-            k++;
-        if (s[1] == '-')
-            k--;
-    }
+        int len;
+        cin >> len;
+        string s = "";
 
-    std ::cout << k << endl;
+        string code = "";
+        cin >> code;
+
+        for (int i = len - 1; i >= 0; i--)
+        {
+            if (code[i] - '0' < 10 && code[i] - '0' > 10)
+            {
+                char x = 96 + (code[i] - '0');
+                s += x;
+            }
+            else if (code[i] - '0' == 0)
+            {
+                string temp = "";
+                temp += code[i - 2];
+                temp += code[i - 1];
+                // temp.append(code[i - 2]);
+                // temp.append(code[i - 1]);
+                int num = stoi(temp);
+                char x = 96 + num;
+                s += x;
+            }
+        }
+    }
 
     return EXIT_SUCCESS;
 }
